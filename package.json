@@ -2,25 +2,66 @@
   "name": "meeting_room_booking_system_frontend_admin",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "commit": "git-cz",
+    "lint": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
+    "gen-api": "node ./src/api/json-merge.js && openapi-generator-cli generate -i ./src/api/new-api-docs.json -g typescript-axios -o ./src/api/autogen --skip-validate-spec",
+    "prepare": "husky install"
+  },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.18.2",
+    "@ant-design/icons": "^5.2.6",
+    "@craco/craco": "^7.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.73",
-    "@types/react": "^18.2.48",
+    "@types/node": "^17.0.45",
+    "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
+    "antd": "^5.12.8",
+    "autoprefixer": "^10.4.16",
+    "axios": "^1.6.5",
+    "cache-loader": "^4.1.0",
+    "postcss": "^8.4.33",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.1",
     "react-scripts": "5.0.1",
+    "speed-measure-webpack-plugin": "^1.5.0",
+    "tailwindcss": "^3.4.1",
+    "terser-webpack-plugin": "^5.3.10",
+    "thread-loader": "^4.0.2",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^3.5.1",
+    "webpack-bundle-analyzer": "^4.10.1",
+    "webpackbar": "^6.0.0",
+    "workbox-background-sync": "^6.6.0",
+    "workbox-broadcast-update": "^6.6.0",
+    "workbox-cacheable-response": "^6.6.0",
+    "workbox-core": "^6.6.0",
+    "workbox-expiration": "^6.6.0",
+    "workbox-google-analytics": "^6.6.0",
+    "workbox-navigation-preload": "^6.6.0",
+    "workbox-precaching": "^6.6.0",
+    "workbox-range-requests": "^6.6.0",
+    "workbox-routing": "^6.6.0",
+    "workbox-strategies": "^6.6.0",
+    "workbox-streams": "^6.6.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "@commitlint/cli": "^18.4.4",
+    "@commitlint/config-conventional": "^18.4.4",
+    "@openapitools/openapi-generator-cli": "^2.7.0",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.3",
+    "jsonfile": "^6.1.0",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +80,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   }
 }

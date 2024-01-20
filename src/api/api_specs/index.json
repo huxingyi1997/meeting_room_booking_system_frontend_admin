@@ -1,0 +1,1046 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/user/register": {
+      "post": {
+        "operationId": "UserController_register",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "NullUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"]
+      }
+    },
+    "/api/v1/user/register-captcha": {
+      "get": {
+        "operationId": "UserController_captcha",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "NullUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"]
+      }
+    },
+    "/api/v1/user/login": {
+      "post": {
+        "operationId": "UserController_userLogin",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/LoginUserVo"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "#/components/schemas/LoginUserVoUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"]
+      }
+    },
+    "/api/v1/user/admin/login": {
+      "post": {
+        "operationId": "UserController_adminLogin",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/LoginUserVo"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "#/components/schemas/LoginUserVoUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"]
+      }
+    },
+    "/api/v1/user/refresh": {
+      "get": {
+        "operationId": "UserController_refresh",
+        "parameters": [
+          {
+            "name": "refreshToken",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/RefreshTokenVo"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "#/components/schemas/RefreshTokenVoUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"]
+      }
+    },
+    "/api/v1/user/admin/refresh": {
+      "get": {
+        "operationId": "UserController_adminRefresh",
+        "parameters": [
+          {
+            "name": "refreshToken",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/RefreshTokenVo"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "#/components/schemas/RefreshTokenVoUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"]
+      }
+    },
+    "/api/v1/user/info": {
+      "get": {
+        "operationId": "UserController_info",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/UserDetailVo"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "#/components/schemas/UserDetailVoUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/user/update_password": {
+      "post": {
+        "operationId": "UserController_updatePassword",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserPasswordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "NullUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"]
+      }
+    },
+    "/api/v1/user/admin/update_password": {
+      "post": {
+        "operationId": "UserController_updatePassword",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserPasswordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "NullUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"]
+      }
+    },
+    "/api/v1/user/update_password/captcha": {
+      "get": {
+        "operationId": "UserController_updatePasswordCaptcha",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "NullUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"]
+      }
+    },
+    "/api/v1/user/update": {
+      "post": {
+        "operationId": "UserController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "NullUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/user/admin/update": {
+      "post": {
+        "operationId": "UserController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "NullUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/user/update/captcha": {
+      "get": {
+        "operationId": "UserController_updateCaptcha",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "NullUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/user/freeze": {
+      "get": {
+        "operationId": "UserController_freeze",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "NullUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/user/list": {
+      "get": {
+        "operationId": "UserController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/UserListVo"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "#/components/schemas/UserListVoUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/user/upload": {
+      "post": {
+        "operationId": "UserController_uploadFile",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "NullUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["User"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/fe-report/performance": {
+      "post": {
+        "operationId": "FeReportController_performance",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerformanceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "NullUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["fe report"]
+      }
+    },
+    "/api/v1/fe-report/error": {
+      "post": {
+        "operationId": "FeReportController_error",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorReportDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "$unifiedResRef": "NullUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["fe report"]
+      }
+    }
+  },
+  "info": {
+    "title": "meeting room booking system",
+    "description": "api document",
+    "version": "1",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "description": "auth based on jwt"
+      }
+    },
+    "schemas": {
+      "RegisterUserDto": {
+        "type": "object",
+        "properties": {
+          "captcha": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "nickName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 6
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": ["captcha", "username", "nickName", "password", "email"]
+      },
+      "UserInfo": {
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "number"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "id": {
+            "type": "number"
+          },
+          "username": {
+            "type": "string"
+          },
+          "nickName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "headPic": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "isFrozen": {
+            "type": "boolean"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "createTime",
+          "roles",
+          "permissions",
+          "id",
+          "username",
+          "nickName",
+          "email",
+          "headPic",
+          "phoneNumber",
+          "isFrozen",
+          "isAdmin"
+        ]
+      },
+      "LoginUserVo": {
+        "type": "object",
+        "properties": {
+          "userInfo": {
+            "$ref": "#/components/schemas/UserInfo"
+          },
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          }
+        },
+        "required": ["userInfo", "accessToken", "refreshToken"]
+      },
+      "LoginUserDto": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 6
+          }
+        },
+        "required": ["username", "password"]
+      },
+      "RefreshTokenVo": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          }
+        },
+        "required": ["accessToken", "refreshToken"]
+      },
+      "UserDetailVo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "username": {
+            "type": "string"
+          },
+          "nickName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "headPic": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "isFrozen": {
+            "type": "boolean"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "createTime": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "username",
+          "nickName",
+          "email",
+          "headPic",
+          "phoneNumber",
+          "isFrozen",
+          "isAdmin",
+          "createTime"
+        ]
+      },
+      "UpdateUserPasswordDto": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 6
+          },
+          "email": {
+            "type": "string"
+          },
+          "captcha": {
+            "type": "string"
+          }
+        },
+        "required": ["username", "password", "email", "captcha"]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "nickName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "captcha": {
+            "type": "string"
+          },
+          "headPic": {
+            "type": "string"
+          }
+        },
+        "required": ["nickName", "email", "captcha", "headPic"]
+      },
+      "UserListVo": {
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserDetailVo"
+            }
+          },
+          "totalCount": {
+            "type": "number"
+          }
+        },
+        "required": ["users", "totalCount"]
+      },
+      "PerformanceEntry": {
+        "type": "object",
+        "properties": {
+          "duration": {
+            "type": "number",
+            "description": "[MDN Reference](https://developer.mozilla.org/docs/Web/API/PerformanceEntry/duration)"
+          },
+          "entryType": {
+            "type": "string",
+            "description": "[MDN Reference](https://developer.mozilla.org/docs/Web/API/PerformanceEntry/entryType)"
+          },
+          "name": {
+            "type": "string",
+            "description": "[MDN Reference](https://developer.mozilla.org/docs/Web/API/PerformanceEntry/name)"
+          },
+          "startTime": {
+            "type": "number",
+            "description": "[MDN Reference](https://developer.mozilla.org/docs/Web/API/PerformanceEntry/startTime)"
+          }
+        },
+        "required": ["duration", "entryType", "name", "startTime"]
+      },
+      "PerformanceDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the metric (in acronym form).",
+            "enum": ["CLS", "FCP", "FID", "INP", "LCP", "TTFB"]
+          },
+          "value": {
+            "type": "number",
+            "description": "The current value of the metric."
+          },
+          "rating": {
+            "type": "string",
+            "description": "The rating as to whether the metric value is within the \"good\",\n\"needs improvement\", or \"poor\" thresholds of the metric.",
+            "enum": ["good", "needs-improvement", "poor"]
+          },
+          "delta": {
+            "type": "number",
+            "description": "The delta between the current value and the last-reported value.\nOn the first report, `delta` and `value` will always be the same."
+          },
+          "id": {
+            "type": "string",
+            "description": "A unique ID representing this particular metric instance. This ID can\nbe used by an analytics tool to dedupe multiple values sent for the same\nmetric instance, or to group multiple deltas together and calculate a\ntotal. It can also be used to differentiate multiple different metric\ninstances sent from the same page, which can happen if the page is\nrestored from the back/forward cache (in that case new metrics object\nget created)."
+          },
+          "entries": {
+            "description": "Any performance entries relevant to the metric value calculation.\nThe array may also be empty if the metric value was not based on any\nentries (e.g. a CLS value of 0 given no layout shifts).",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PerformanceEntry"
+            }
+          },
+          "navigationType": {
+            "type": "string",
+            "description": "The type of navigation.\n\nThis will be the value returned by the Navigation Timing API (or\n`undefined` if the browser doesn't support that API), with the following\nexceptions:\n- 'back-forward-cache': for pages that are restored from the bfcache.\n- 'prerender': for pages that were prerendered.\n- 'restore': for pages that were discarded by the browser and then\nrestored by the user.",
+            "enum": ["navigate", "reload", "back-forward", "back-forward-cache", "prerender", "restore"]
+          }
+        },
+        "required": ["name", "value", "rating", "delta", "id", "entries", "navigationType"]
+      },
+      "ErrorReportDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "error_info": {
+            "type": "string"
+          }
+        },
+        "required": ["error", "error_info"]
+      }
+    }
+  }
+}
