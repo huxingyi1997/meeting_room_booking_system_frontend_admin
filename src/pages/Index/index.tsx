@@ -12,7 +12,7 @@ const Index = () => {
           <UserOutlined className="text-4xl" />
         </Link>
       </div>
-      <div className="flex-grow">
+      <div className="flex-grow border-b border-solid border-gray-300">
         <Outlet></Outlet>
       </div>
     </div>

@@ -1,9 +1,8 @@
+import { useCallback } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Menu as AntdMenu, MenuProps } from 'antd';
-import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 
 import { router } from '../../App';
-import { useCallback } from 'react';
 
 const items: MenuProps['items'] = [
   {
@@ -24,7 +23,7 @@ const items: MenuProps['items'] = [
   },
 ];
 
-const handleMenuItemClick: MenuClickEventHandler = info => {
+const handleMenuItemClick: MenuProps['onClick'] = info => {
   let path = '';
   switch (info.key) {
     case '1':
@@ -62,11 +61,16 @@ const Menu = () => {
   }, []);
 
   return (
-    <div id="menu-container" className="flex flex-row">
+    <div id="menu-container" className="flex flex-row h-full">
       <div className="w-200">
-        <AntdMenu defaultSelectedKeys={getSelectedKeys()} items={items} onClick={handleMenuItemClick} />
+        <AntdMenu
+          defaultSelectedKeys={getSelectedKeys()}
+          items={items}
+          onClick={handleMenuItemClick}
+          className="h-full"
+        />
       </div>
-      <div className="flex-1">
+      <div className="flex-1 p-5">
         <Outlet></Outlet>
       </div>
     </div>
