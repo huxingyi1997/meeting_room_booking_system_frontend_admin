@@ -782,6 +782,101 @@ export class FeReportApi extends BaseAPI {
 }
 
 /**
+ * SseApi - axios parameter creator
+ * @export
+ */
+export const SseApiAxiosParamCreator = function (configuration?: Configuration) {
+  return {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sseControllerUpdateRecord: async (options: any = {}): Promise<RequestArgs> => {
+      const localVarPath = `/api/v1/sse/update_record`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * SseApi - functional programming interface
+ * @export
+ */
+export const SseApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = SseApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async sseControllerUpdateRecord(
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.sseControllerUpdateRecord(options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+  };
+};
+
+/**
+ * SseApi - factory interface
+ * @export
+ */
+export const SseApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+  const localVarFp = SseApiFp(configuration);
+  return {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sseControllerUpdateRecord(options?: any): AxiosPromise<object> {
+      return localVarFp.sseControllerUpdateRecord(options).then(request => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * SseApi - object-oriented interface
+ * @export
+ * @class SseApi
+ * @extends {BaseAPI}
+ */
+export class SseApi extends BaseAPI {
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof SseApi
+   */
+  public sseControllerUpdateRecord(options?: any) {
+    return SseApiFp(this.configuration)
+      .sseControllerUpdateRecord(options)
+      .then(request => request(this.axios, this.basePath));
+  }
+}
+
+/**
  * UserApi - axios parameter creator
  * @export
  */
@@ -959,10 +1054,22 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
     },
     /**
      *
+     * @param {number} [pageNo]
+     * @param {number} [pageSize]
+     * @param {string} [email]
+     * @param {string} [username]
+     * @param {string} [nickName]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    userControllerList: async (options: any = {}): Promise<RequestArgs> => {
+    userControllerList: async (
+      pageNo?: number,
+      pageSize?: number,
+      email?: string,
+      username?: string,
+      nickName?: string,
+      options: any = {}
+    ): Promise<RequestArgs> => {
       const localVarPath = `/api/v1/user/list`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -978,6 +1085,26 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
       // authentication bearer required
       // http bearer authentication required
       await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (pageNo !== undefined) {
+        localVarQueryParameter['pageNo'] = pageNo;
+      }
+
+      if (pageSize !== undefined) {
+        localVarQueryParameter['pageSize'] = pageSize;
+      }
+
+      if (email !== undefined) {
+        localVarQueryParameter['email'] = email;
+      }
+
+      if (username !== undefined) {
+        localVarQueryParameter['username'] = username;
+      }
+
+      if (nickName !== undefined) {
+        localVarQueryParameter['nickName'] = nickName;
+      }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -1414,13 +1541,30 @@ export const UserApiFp = function (configuration?: Configuration) {
     },
     /**
      *
+     * @param {number} [pageNo]
+     * @param {number} [pageSize]
+     * @param {string} [email]
+     * @param {string} [username]
+     * @param {string} [nickName]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async userControllerList(
+      pageNo?: number,
+      pageSize?: number,
+      email?: string,
+      username?: string,
+      nickName?: string,
       options?: any
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserListVoUnifiedRes>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerList(options);
+      const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerList(
+        pageNo,
+        pageSize,
+        email,
+        username,
+        nickName,
+        options
+      );
       return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
     },
     /**
@@ -1613,11 +1757,25 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
     },
     /**
      *
+     * @param {number} [pageNo]
+     * @param {number} [pageSize]
+     * @param {string} [email]
+     * @param {string} [username]
+     * @param {string} [nickName]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    userControllerList(options?: any): AxiosPromise<UserListVoUnifiedRes> {
-      return localVarFp.userControllerList(options).then(request => request(axios, basePath));
+    userControllerList(
+      pageNo?: number,
+      pageSize?: number,
+      email?: string,
+      username?: string,
+      nickName?: string,
+      options?: any
+    ): AxiosPromise<UserListVoUnifiedRes> {
+      return localVarFp
+        .userControllerList(pageNo, pageSize, email, username, nickName, options)
+        .then(request => request(axios, basePath));
     },
     /**
      *
@@ -1794,13 +1952,25 @@ export class UserApi extends BaseAPI {
 
   /**
    *
+   * @param {number} [pageNo]
+   * @param {number} [pageSize]
+   * @param {string} [email]
+   * @param {string} [username]
+   * @param {string} [nickName]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UserApi
    */
-  public userControllerList(options?: any) {
+  public userControllerList(
+    pageNo?: number,
+    pageSize?: number,
+    email?: string,
+    username?: string,
+    nickName?: string,
+    options?: any
+  ) {
     return UserApiFp(this.configuration)
-      .userControllerList(options)
+      .userControllerList(pageNo, pageSize, email, username, nickName, options)
       .then(request => request(this.axios, this.basePath));
   }
 

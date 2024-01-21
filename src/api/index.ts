@@ -85,7 +85,7 @@ axiosInstance.interceptors.response.use(
       });
     }
     if (error?.response?.status === HttpStatusCode.Unauthorized) {
-      if (!config?.url.includes('/user/refresh')) {
+      if (!config?.url.includes('/user/admin/refresh')) {
         const res = await refreshToken();
 
         refreshing = false;
@@ -116,7 +116,7 @@ axiosInstance.interceptors.response.use(
 
 async function refreshToken() {
   const refresh_token = localStorage.getItem('refresh_token') || '';
-  const res = await userApiInterface.userControllerRefresh(refresh_token);
+  const res = await userApiInterface.userControllerAdminRefresh(refresh_token);
 
   localStorage.setItem('access_token', res.data.data?.accessToken || '');
   localStorage.setItem('refresh_token', res.data.data?.refreshToken || '');

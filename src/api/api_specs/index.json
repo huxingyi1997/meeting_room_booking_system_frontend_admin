@@ -570,6 +570,16 @@
       "get": {
         "operationId": "UserController_list",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserListDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "",
@@ -731,6 +741,25 @@
           }
         },
         "tags": ["fe report"]
+      }
+    },
+    "/api/v1/sse/update_record": {
+      "get": {
+        "operationId": "SseController_updateRecord",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["sse"]
       }
     }
   },
@@ -966,6 +995,26 @@
           }
         },
         "required": ["users", "totalCount"]
+      },
+      "UserListDto": {
+        "type": "object",
+        "properties": {
+          "pageNo": {
+            "type": "number"
+          },
+          "pageSize": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "nickName": {
+            "type": "string"
+          }
+        }
       },
       "PerformanceEntry": {
         "type": "object",

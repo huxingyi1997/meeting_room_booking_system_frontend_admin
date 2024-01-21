@@ -1,26 +1,65 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Skeleton } from 'antd';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-function App() {
+const Index = React.lazy(() => import('./pages/Index'));
+const ErrorPage = React.lazy(() => import('./pages/ErrorPage'));
+
+const Menu = React.lazy(() => import('./pages/Menu'));
+const UserManage = React.lazy(() => import('./pages/UserManage'));
+
+const ModifyMenu = React.lazy(() => import('./pages/ModifyMenu'));
+const InfoModify = React.lazy(() => import('./pages/InfoModify'));
+const PasswordModify = React.lazy(() => import('./pages/PasswordModify'));
+
+const Login = React.lazy(() => import('./pages/Login'));
+
+const routes = [
+  {
+    path: '/',
+    element: <Index></Index>,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/',
+        element: <Menu></Menu>,
+        children: [
+          {
+            path: 'user_manage',
+            element: <UserManage />,
+          },
+        ],
+      },
+      {
+        path: '/user',
+        element: <ModifyMenu></ModifyMenu>,
+        children: [
+          {
+            path: 'info_modify',
+            element: <InfoModify />,
+          },
+          {
+            path: 'password_modify',
+            element: <PasswordModify />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'login',
+    element: <Login />,
+  },
+];
+
+export const router = createBrowserRouter(routes);
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Suspense fallback={<Skeleton />}>
+      <RouterProvider router={router} />
+    </React.Suspense>
   );
-}
+};
 
 export default App;
