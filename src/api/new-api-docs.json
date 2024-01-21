@@ -192,7 +192,13 @@
     "/api/v1/user/list": {
       "get": {
         "operationId": "UserController_list",
-        "parameters": [],
+        "parameters": [
+          { "name": "pageNo", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "pageSize", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "email", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "username", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "nickName", "required": false, "in": "query", "schema": { "type": "string" } }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -248,6 +254,16 @@
           "200": { "description": "", "content": { "application/json": { "schema": { "$ref": "NullUnifiedRes" } } } }
         },
         "tags": ["fe report"]
+      }
+    },
+    "/api/v1/sse/update_record": {
+      "get": {
+        "operationId": "SseController_updateRecord",
+        "parameters": [],
+        "responses": {
+          "200": { "description": "", "content": { "application/json": { "schema": { "type": "object" } } } }
+        },
+        "tags": ["sse"]
       }
     }
   },
