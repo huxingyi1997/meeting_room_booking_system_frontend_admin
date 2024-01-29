@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Popconfirm, Table, TimePicker, message } from 'antd';
+import { Button, DatePicker, Form, Input, Popconfirm, Space, Table, TimePicker, message } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { useForm } from 'antd/es/form/Form';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -28,7 +28,59 @@ const BookingManage = () => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [bookingSearchResult, setBookingSearchResult] = useState<Array<BookingSearchResult>>([]);
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState<number>(0);
+
+  const searchBooking = useCallback(
+    async (values: SearchBooking) => {
+      const {
+        username,
+        meetingRoomName,
+        meetingRoomPosition,
+        rangeStartDate,
+        rangeStartTime,
+        rangeEndDate,
+        rangeEndTime,
+      } = values;
+      let bookingTimeRangeStart: number | undefined;
+      let bookingTimeRangeEnd: number | undefined;
+
+      if (rangeStartDate && rangeStartTime) {
+        const rangeStartDateStr = dayjs(rangeStartDate).format('YYYY-MM-DD');
+        const rangeStartTimeStr = dayjs(rangeStartTime).format('HH:mm');
+        bookingTimeRangeStart = dayjs(rangeStartDateStr + ' ' + rangeStartTimeStr).valueOf();
+      }
+
+      if (rangeEndDate && rangeEndTime) {
+        const rangeEndDateStr = dayjs(rangeEndDate).format('YYYY-MM-DD');
+        const rangeEndTimeStr = dayjs(rangeEndTime).format('HH:mm');
+        bookingTimeRangeEnd = dayjs(rangeEndDateStr + ' ' + rangeEndTimeStr).valueOf();
+      }
+
+      const res = await bookingApiInterface.bookingControllerList(
+        pageNo,
+        pageSize,
+        username,
+        meetingRoomName,
+        meetingRoomPosition,
+        bookingTimeRangeStart,
+        bookingTimeRangeEnd
+      );
+      const { data } = res.data;
+      if (res.status === HttpStatusCode.Ok && data) {
+        const { bookings, totalCount } = data;
+        setBookingSearchResult(
+          bookings.map(item => {
+            return {
+              key: item.id,
+              ...item,
+            };
+          })
+        );
+        setTotalCount(totalCount);
+      }
+    },
+    [pageNo, pageSize]
+  );
 
   const changeStatus = useCallback(async (id: number, status: OperationEnum) => {
     const res =
@@ -41,6 +93,11 @@ const BookingManage = () => {
       message.success('状态更新成功');
       setNum(Math.random());
     }
+  }, []);
+
+  const changePage = useCallback((pageNo: number, pageSize: number) => {
+    setPageNo(pageNo);
+    setPageSize(pageSize);
   }, []);
 
   const columns: ColumnsType<BookingSearchResult> = useMemo(
@@ -110,7 +167,7 @@ const BookingManage = () => {
         dataIndex: 'id',
         key: 'id',
         render: (id: number) => (
-          <div>
+          <Space>
             <Popconfirm
               title="通过申请"
               description="确认通过吗？"
@@ -141,63 +198,12 @@ const BookingManage = () => {
               <button>解除</button>
             </Popconfirm>
             <br />
-          </div>
+          </Space>
         ),
       },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
-  );
-
-  const searchBooking = useCallback(
-    async (values: SearchBooking) => {
-      const {
-        username,
-        meetingRoomName,
-        meetingRoomPosition,
-        rangeStartDate,
-        rangeStartTime,
-        rangeEndDate,
-        rangeEndTime,
-      } = values;
-      let bookingTimeRangeStart;
-      let bookingTimeRangeEnd;
-
-      if (rangeStartDate && rangeStartTime) {
-        const rangeStartDateStr = dayjs(rangeStartDate).format('YYYY-MM-DD');
-        const rangeStartTimeStr = dayjs(rangeStartTime).format('HH:mm');
-        bookingTimeRangeStart = dayjs(rangeStartDateStr + ' ' + rangeStartTimeStr).valueOf();
-      }
-
-      if (rangeEndDate && rangeEndTime) {
-        const rangeEndDateStr = dayjs(rangeEndDate).format('YYYY-MM-DD');
-        const rangeEndTimeStr = dayjs(rangeEndTime).format('HH:mm');
-        bookingTimeRangeEnd = dayjs(rangeEndDateStr + ' ' + rangeEndTimeStr).valueOf();
-      }
-      const res = await bookingApiInterface.bookingControllerList(
-        pageNo,
-        pageSize,
-        username,
-        meetingRoomName,
-        meetingRoomPosition,
-        bookingTimeRangeStart,
-        bookingTimeRangeEnd
-      );
-      const { data } = res.data;
-      if (res.status === HttpStatusCode.Ok && data) {
-        const { bookings, totalCount } = data;
-        setBookingSearchResult(
-          bookings.map(item => {
-            return {
-              key: item.id,
-              ...item,
-            };
-          })
-        );
-        setTotalCount(totalCount);
-      }
-    },
-    [pageNo, pageSize]
   );
 
   const [form] = useForm();
@@ -214,11 +220,6 @@ const BookingManage = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNo, pageSize, num]);
-
-  const changePage = function (pageNo: number, pageSize: number) {
-    setPageNo(pageNo);
-    setPageSize(pageSize);
-  };
 
   return (
     <div id="bookingManage-container" className="p-5">
@@ -259,6 +260,7 @@ const BookingManage = () => {
           </Form.Item>
         </Form>
       </div>
+
       <div className="bookingManage-table">
         <Table
           columns={columns}

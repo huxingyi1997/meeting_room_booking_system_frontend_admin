@@ -239,7 +239,7 @@
         "responses": {
           "200": { "description": "", "content": { "application/json": { "schema": { "$ref": "NullUnifiedRes" } } } }
         },
-        "tags": ["fe report"]
+        "tags": ["FE report"]
       }
     },
     "/api/v1/fe-report/error": {
@@ -253,7 +253,7 @@
         "responses": {
           "200": { "description": "", "content": { "application/json": { "schema": { "$ref": "NullUnifiedRes" } } } }
         },
-        "tags": ["fe report"]
+        "tags": ["FE report"]
       }
     },
     "/api/v1/sse/update_record": {
@@ -263,7 +263,7 @@
         "responses": {
           "200": { "description": "", "content": { "application/json": { "schema": { "type": "object" } } } }
         },
-        "tags": ["sse"]
+        "tags": ["SSE"]
       }
     },
     "/api/v1/meeting-room/list": {
@@ -341,6 +341,149 @@
           "200": { "description": "", "content": { "application/json": { "schema": { "$ref": "NullUnifiedRes" } } } }
         },
         "tags": ["Meeting room"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/api/v1/booking/add": {
+      "post": {
+        "operationId": "BookingController_add",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateBookingDto" } } }
+        },
+        "responses": {
+          "200": { "description": "", "content": { "application/json": { "schema": { "$ref": "NullUnifiedRes" } } } }
+        },
+        "tags": ["Booking"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/api/v1/booking/list": {
+      "get": {
+        "operationId": "BookingController_list",
+        "parameters": [
+          { "name": "pageNo", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "pageSize", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "username", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "meetingRoomName", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "meetingRoomPosition", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "bookingTimeRangeStart", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "bookingTimeRangeEnd", "required": false, "in": "query", "schema": { "type": "number" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/BookingListVoUnifiedRes" } } }
+          }
+        },
+        "tags": ["Booking"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/api/v1/booking/apply/{id}": {
+      "get": {
+        "operationId": "BookingController_apply",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }],
+        "responses": {
+          "200": { "description": "", "content": { "application/json": { "schema": { "$ref": "NullUnifiedRes" } } } }
+        },
+        "tags": ["Booking"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/api/v1/booking/reject/{id}": {
+      "get": {
+        "operationId": "BookingController_reject",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }],
+        "responses": {
+          "200": { "description": "", "content": { "application/json": { "schema": { "$ref": "NullUnifiedRes" } } } }
+        },
+        "tags": ["Booking"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/api/v1/booking/unbind/{id}": {
+      "get": {
+        "operationId": "BookingController_unbind",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }],
+        "responses": {
+          "200": { "description": "", "content": { "application/json": { "schema": { "$ref": "NullUnifiedRes" } } } }
+        },
+        "tags": ["Booking"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/api/v1/booking/urge/{id}": {
+      "get": {
+        "operationId": "BookingController_urge",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }],
+        "responses": {
+          "200": { "description": "", "content": { "application/json": { "schema": { "$ref": "NullUnifiedRes" } } } }
+        },
+        "tags": ["Booking"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/api/v1/statistic/userBookingCount": {
+      "get": {
+        "operationId": "StatisticController_userBookignCount",
+        "parameters": [
+          { "name": "startTime", "required": true, "in": "query", "schema": { "type": "string" } },
+          { "name": "endTime", "required": true, "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": { "type": "object", "$ref": "#/components/schemas/UserBookignCountVo" }
+                    },
+                    "error": { "type": "integer" },
+                    "error_msg": { "type": "string" }
+                  },
+                  "$$ref": "#/components/schemas/UserBookignCountVoUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Statistic"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/api/v1/statistic/meetingRoomUsedCount": {
+      "get": {
+        "operationId": "StatisticController_meetingRoomUsedCount",
+        "parameters": [
+          { "name": "startTime", "required": true, "in": "query", "schema": { "type": "string" } },
+          { "name": "endTime", "required": true, "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": { "type": "object", "$ref": "#/components/schemas/MeetingRoomUsedCountVo" }
+                    },
+                    "error": { "type": "integer" },
+                    "error_msg": { "type": "string" }
+                  },
+                  "$$ref": "#/components/schemas/MeetingRoomUsedCountVoUnifiedRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Statistic"],
         "security": [{ "bearer": [] }]
       }
     }
@@ -561,6 +704,100 @@
         },
         "required": ["id"]
       },
+      "CreateBookingDto": {
+        "type": "object",
+        "properties": {
+          "startTime": { "type": "number", "format": "date-time" },
+          "endTime": { "type": "number", "format": "date-time" },
+          "meetingRoomId": { "type": "number" },
+          "note": { "type": "string" }
+        },
+        "required": ["startTime", "endTime", "meetingRoomId"]
+      },
+      "Permission": {
+        "type": "object",
+        "properties": { "id": { "type": "number" }, "code": { "type": "string" }, "description": { "type": "string" } },
+        "required": ["id", "code", "description"]
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "name": { "type": "string" },
+          "permissions": { "type": "array", "items": { "$ref": "#/components/schemas/Permission" } }
+        },
+        "required": ["id", "name", "permissions"]
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "username": { "type": "string" },
+          "password": { "type": "string", "minLength": 6 },
+          "nickName": { "type": "string" },
+          "email": { "type": "string" },
+          "headPic": { "type": "string" },
+          "phoneNumber": { "type": "string" },
+          "isFrozen": { "type": "boolean" },
+          "isAdmin": { "type": "boolean" },
+          "createTime": { "format": "date-time", "type": "string" },
+          "updateTime": { "format": "date-time", "type": "string" },
+          "roles": { "type": "array", "items": { "$ref": "#/components/schemas/Role" } }
+        },
+        "required": [
+          "id",
+          "username",
+          "password",
+          "nickName",
+          "email",
+          "isFrozen",
+          "isAdmin",
+          "createTime",
+          "updateTime",
+          "roles"
+        ]
+      },
+      "Booking": {
+        "type": "object",
+        "properties": {
+          "startTime": { "type": "number", "format": "date-time" },
+          "endTime": { "type": "number", "format": "date-time" },
+          "id": { "type": "number" },
+          "status": { "type": "string", "enum": ["progressing", "approved", "rejected", "released"] },
+          "note": { "type": "string" },
+          "user": { "$ref": "#/components/schemas/User" },
+          "room": { "$ref": "#/components/schemas/MeetingRoom" },
+          "createTime": { "format": "date-time", "type": "string" },
+          "updateTime": { "format": "date-time", "type": "string" }
+        },
+        "required": ["startTime", "endTime", "id", "status", "user", "room", "createTime", "updateTime"]
+      },
+      "BookingListVo": {
+        "type": "object",
+        "properties": {
+          "bookings": { "type": "array", "items": { "$ref": "#/components/schemas/Booking" } },
+          "totalCount": { "type": "number" }
+        },
+        "required": ["bookings", "totalCount"]
+      },
+      "UserBookignCountVo": {
+        "type": "object",
+        "properties": {
+          "userId": { "type": "string" },
+          "username": { "type": "string" },
+          "bookingCount": { "type": "string" }
+        },
+        "required": ["userId", "username", "bookingCount"]
+      },
+      "MeetingRoomUsedCountVo": {
+        "type": "object",
+        "properties": {
+          "meetingRoomId": { "type": "string" },
+          "meetingRoomName": { "type": "string" },
+          "usedCount": { "type": "string" }
+        },
+        "required": ["meetingRoomId", "meetingRoomName", "usedCount"]
+      },
       "NullUnifiedRes": {
         "type": "object",
         "properties": { "data": { "type": "string" }, "code": { "type": "integer" }, "message": { "type": "string" } }
@@ -609,6 +846,14 @@
         "type": "object",
         "properties": {
           "data": { "type": "object", "$ref": "#/components/schemas/MeetingRoom" },
+          "code": { "type": "integer" },
+          "message": { "type": "string" }
+        }
+      },
+      "BookingListVoUnifiedRes": {
+        "type": "object",
+        "properties": {
+          "data": { "type": "object", "$ref": "#/components/schemas/BookingListVo" },
           "code": { "type": "integer" },
           "message": { "type": "string" }
         }

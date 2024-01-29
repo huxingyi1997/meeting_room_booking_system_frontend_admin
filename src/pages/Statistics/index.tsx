@@ -1,9 +1,10 @@
 import { Button, DatePicker, Form, Select } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import * as echarts from 'echarts';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import dayjs from 'dayjs';
 import { HttpStatusCode } from 'axios';
+import { statisticApiInterface } from '@/api';
 
 interface UserBookingData {
   userId: string;
@@ -23,20 +24,23 @@ const Statistics = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const containerRef2 = useRef<HTMLDivElement>(null);
 
-  async function getStatisticData(values: { startTime: string; endTime: string }) {
-    // const startTime = dayjs(values.startTime).format('YYYY-MM-DD');
-    // const endTime = dayjs(values.endTime).format('YYYY-MM-DD');
-    // const res = await userBookingCount(startTime, endTime);
-    // const { data } = res.data;
-    // if(res.status === HttpStatusCode.Ok) {
-    //     setUserBookingData(data);
-    // }
-    // const res2 = await meetingRoomUsedCount(startTime, endTime);
-    // const { data: data2 } = res2.data;
-    // if(res2.status === HttpStatusCode.Ok) {
-    //     setMeetingRoomUsedData(data2);
-    // }
-  }
+  const getStatisticData = useCallback(async (values: { startTime: string; endTime: string }) => {
+    const startTime = dayjs(values.startTime).format('YYYY-MM-DD');
+    const endTime = dayjs(values.endTime).format('YYYY-MM-DD');
+
+    const res = await statisticApiInterface.statisticControllerUserBookignCount(startTime, endTime);
+    // @ts-ignore
+    const { data } = res.data;
+    if (res.status === HttpStatusCode.Ok && data) {
+      setUserBookingData(data);
+    }
+    const res2 = await statisticApiInterface.statisticControllerMeetingRoomUsedCount(startTime, endTime);
+    // @ts-ignore
+    const { data: data2 } = res2.data;
+    if (res2.status === HttpStatusCode.Ok) {
+      setMeetingRoomUsedData(data2);
+    }
+  }, []);
 
   useEffect(() => {
     const myChart = echarts.init(containerRef.current);
@@ -67,6 +71,7 @@ const Statistics = () => {
         },
       ],
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userBookingData]);
 
   useEffect(() => {
@@ -98,6 +103,7 @@ const Statistics = () => {
         },
       ],
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [meetingRoomUsedData]);
 
   const [form] = useForm();

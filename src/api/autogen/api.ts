@@ -42,19 +42,19 @@ export interface Booking {
    * @type {number}
    * @memberof Booking
    */
+  startTime: number;
+  /**
+   *
+   * @type {number}
+   * @memberof Booking
+   */
+  endTime: number;
+  /**
+   *
+   * @type {number}
+   * @memberof Booking
+   */
   id: number;
-  /**
-   *
-   * @type {string}
-   * @memberof Booking
-   */
-  startTime: string;
-  /**
-   *
-   * @type {string}
-   * @memberof Booking
-   */
-  endTime: string;
   /**
    *
    * @type {string}
@@ -159,19 +159,19 @@ export interface CreateBookingDto {
    * @type {number}
    * @memberof CreateBookingDto
    */
+  startTime: number;
+  /**
+   *
+   * @type {number}
+   * @memberof CreateBookingDto
+   */
+  endTime: number;
+  /**
+   *
+   * @type {number}
+   * @memberof CreateBookingDto
+   */
   meetingRoomId: number;
-  /**
-   *
-   * @type {string}
-   * @memberof CreateBookingDto
-   */
-  startTime: string;
-  /**
-   *
-   * @type {string}
-   * @memberof CreateBookingDto
-   */
-  endTime: string;
   /**
    *
    * @type {string}
@@ -433,6 +433,31 @@ export interface MeetingRoomUnifiedRes {
    * @memberof MeetingRoomUnifiedRes
    */
   message?: string;
+}
+/**
+ *
+ * @export
+ * @interface MeetingRoomUsedCountVo
+ */
+export interface MeetingRoomUsedCountVo {
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoomUsedCountVo
+   */
+  meetingRoomId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoomUsedCountVo
+   */
+  meetingRoomName: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoomUsedCountVo
+   */
+  usedCount: string;
 }
 /**
  *
@@ -888,6 +913,31 @@ export interface User {
    * @memberof User
    */
   roles: Array<Role>;
+}
+/**
+ *
+ * @export
+ * @interface UserBookignCountVo
+ */
+export interface UserBookignCountVo {
+  /**
+   *
+   * @type {string}
+   * @memberof UserBookignCountVo
+   */
+  userId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof UserBookignCountVo
+   */
+  username: string;
+  /**
+   *
+   * @type {string}
+   * @memberof UserBookignCountVo
+   */
+  bookingCount: string;
 }
 /**
  *
@@ -2407,6 +2457,231 @@ export class SSEApi extends BaseAPI {
   public sseControllerUpdateRecord(options?: any) {
     return SSEApiFp(this.configuration)
       .sseControllerUpdateRecord(options)
+      .then(request => request(this.axios, this.basePath));
+  }
+}
+
+/**
+ * StatisticApi - axios parameter creator
+ * @export
+ */
+export const StatisticApiAxiosParamCreator = function (configuration?: Configuration) {
+  return {
+    /**
+     *
+     * @param {string} startTime
+     * @param {string} endTime
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    statisticControllerMeetingRoomUsedCount: async (
+      startTime: string,
+      endTime: string,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'startTime' is not null or undefined
+      assertParamExists('statisticControllerMeetingRoomUsedCount', 'startTime', startTime);
+      // verify required parameter 'endTime' is not null or undefined
+      assertParamExists('statisticControllerMeetingRoomUsedCount', 'endTime', endTime);
+      const localVarPath = `/api/v1/statistic/meetingRoomUsedCount`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (startTime !== undefined) {
+        localVarQueryParameter['startTime'] = startTime;
+      }
+
+      if (endTime !== undefined) {
+        localVarQueryParameter['endTime'] = endTime;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {string} startTime
+     * @param {string} endTime
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    statisticControllerUserBookignCount: async (
+      startTime: string,
+      endTime: string,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'startTime' is not null or undefined
+      assertParamExists('statisticControllerUserBookignCount', 'startTime', startTime);
+      // verify required parameter 'endTime' is not null or undefined
+      assertParamExists('statisticControllerUserBookignCount', 'endTime', endTime);
+      const localVarPath = `/api/v1/statistic/userBookingCount`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (startTime !== undefined) {
+        localVarQueryParameter['startTime'] = startTime;
+      }
+
+      if (endTime !== undefined) {
+        localVarQueryParameter['endTime'] = endTime;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * StatisticApi - functional programming interface
+ * @export
+ */
+export const StatisticApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = StatisticApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @param {string} startTime
+     * @param {string} endTime
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async statisticControllerMeetingRoomUsedCount(
+      startTime: string,
+      endTime: string,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.statisticControllerMeetingRoomUsedCount(
+        startTime,
+        endTime,
+        options
+      );
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+    /**
+     *
+     * @param {string} startTime
+     * @param {string} endTime
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async statisticControllerUserBookignCount(
+      startTime: string,
+      endTime: string,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.statisticControllerUserBookignCount(
+        startTime,
+        endTime,
+        options
+      );
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+  };
+};
+
+/**
+ * StatisticApi - factory interface
+ * @export
+ */
+export const StatisticApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+  const localVarFp = StatisticApiFp(configuration);
+  return {
+    /**
+     *
+     * @param {string} startTime
+     * @param {string} endTime
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    statisticControllerMeetingRoomUsedCount(startTime: string, endTime: string, options?: any): AxiosPromise<object> {
+      return localVarFp
+        .statisticControllerMeetingRoomUsedCount(startTime, endTime, options)
+        .then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {string} startTime
+     * @param {string} endTime
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    statisticControllerUserBookignCount(startTime: string, endTime: string, options?: any): AxiosPromise<object> {
+      return localVarFp
+        .statisticControllerUserBookignCount(startTime, endTime, options)
+        .then(request => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * StatisticApi - object-oriented interface
+ * @export
+ * @class StatisticApi
+ * @extends {BaseAPI}
+ */
+export class StatisticApi extends BaseAPI {
+  /**
+   *
+   * @param {string} startTime
+   * @param {string} endTime
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof StatisticApi
+   */
+  public statisticControllerMeetingRoomUsedCount(startTime: string, endTime: string, options?: any) {
+    return StatisticApiFp(this.configuration)
+      .statisticControllerMeetingRoomUsedCount(startTime, endTime, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {string} startTime
+   * @param {string} endTime
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof StatisticApi
+   */
+  public statisticControllerUserBookignCount(startTime: string, endTime: string, options?: any) {
+    return StatisticApiFp(this.configuration)
+      .statisticControllerUserBookignCount(startTime, endTime, options)
       .then(request => request(this.axios, this.basePath));
   }
 }
