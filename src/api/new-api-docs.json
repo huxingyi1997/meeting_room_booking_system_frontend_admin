@@ -436,19 +436,7 @@
           "200": {
             "description": "",
             "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": { "type": "object", "$ref": "#/components/schemas/UserBookignCountVo" }
-                    },
-                    "error": { "type": "integer" },
-                    "error_msg": { "type": "string" }
-                  },
-                  "$$ref": "#/components/schemas/UserBookignCountVoUnifiedRes"
-                }
-              }
+              "application/json": { "schema": { "$ref": "#/components/schemas/UserBookignCountVoUnifiedRes" } }
             }
           }
         },
@@ -467,19 +455,7 @@
           "200": {
             "description": "",
             "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": { "type": "object", "$ref": "#/components/schemas/MeetingRoomUsedCountVo" }
-                    },
-                    "error": { "type": "integer" },
-                    "error_msg": { "type": "string" }
-                  },
-                  "$$ref": "#/components/schemas/MeetingRoomUsedCountVoUnifiedRes"
-                }
-              }
+              "application/json": { "schema": { "$ref": "#/components/schemas/MeetingRoomUsedCountVoUnifiedRes" } }
             }
           }
         },
@@ -856,6 +832,25 @@
           "data": { "type": "object", "$ref": "#/components/schemas/BookingListVo" },
           "code": { "type": "integer" },
           "message": { "type": "string" }
+        }
+      },
+      "UserBookignCountVoUnifiedRes": {
+        "type": "object",
+        "properties": {
+          "data": { "type": "array", "items": { "type": "object", "$ref": "#/components/schemas/UserBookignCountVo" } },
+          "error": { "type": "integer" },
+          "error_msg": { "type": "string" }
+        }
+      },
+      "MeetingRoomUsedCountVoUnifiedRes": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": { "type": "object", "$ref": "#/components/schemas/MeetingRoomUsedCountVo" }
+          },
+          "error": { "type": "integer" },
+          "error_msg": { "type": "string" }
         }
       }
     }

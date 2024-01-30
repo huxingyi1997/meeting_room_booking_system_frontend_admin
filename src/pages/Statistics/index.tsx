@@ -4,22 +4,13 @@ import * as echarts from 'echarts';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import dayjs from 'dayjs';
 import { HttpStatusCode } from 'axios';
-import { statisticApiInterface } from '@/api';
 
-interface UserBookingData {
-  userId: string;
-  username: string;
-  bookingCount: string;
-}
-interface MeetingRoomUsedData {
-  meetingRoomName: string;
-  meetingRoomId: number;
-  usedCount: string;
-}
+import { statisticApiInterface } from '@/api';
+import { MeetingRoomUsedCountVo, UserBookignCountVo } from '@/api/autogen';
 
 const Statistics = () => {
-  const [userBookingData, setUserBookingData] = useState<Array<UserBookingData>>();
-  const [meetingRoomUsedData, setMeetingRoomUsedData] = useState<Array<MeetingRoomUsedData>>();
+  const [userBookingData, setUserBookingData] = useState<Array<UserBookignCountVo>>();
+  const [meetingRoomUsedData, setMeetingRoomUsedData] = useState<Array<MeetingRoomUsedCountVo>>();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const containerRef2 = useRef<HTMLDivElement>(null);
@@ -29,16 +20,14 @@ const Statistics = () => {
     const endTime = dayjs(values.endTime).format('YYYY-MM-DD');
 
     const res = await statisticApiInterface.statisticControllerUserBookignCount(startTime, endTime);
-    // @ts-ignore
-    const { data } = res.data;
-    if (res.status === HttpStatusCode.Ok && data) {
-      setUserBookingData(data);
+    const { data: userBookingData } = res.data;
+    if (res.status === HttpStatusCode.Ok && userBookingData) {
+      setUserBookingData(userBookingData);
     }
     const res2 = await statisticApiInterface.statisticControllerMeetingRoomUsedCount(startTime, endTime);
-    // @ts-ignore
-    const { data: data2 } = res2.data;
-    if (res2.status === HttpStatusCode.Ok) {
-      setMeetingRoomUsedData(data2);
+    const { data: meetingRoomUsedData } = res2.data;
+    if (res2.status === HttpStatusCode.Ok && meetingRoomUsedData) {
+      setMeetingRoomUsedData(meetingRoomUsedData);
     }
   }, []);
 
@@ -109,8 +98,8 @@ const Statistics = () => {
   const [form] = useForm();
 
   return (
-    <div id="statistics-container">
-      <div className="statistics-form">
+    <div id="statistics-container" className="p-5 flex flex-col items-center">
+      <div className="mb-10 w-full">
         <Form form={form} onFinish={getStatisticData} name="search" layout="inline" colon={false}>
           <Form.Item label="开始日期" name="startTime">
             <DatePicker />
@@ -134,8 +123,9 @@ const Statistics = () => {
           </Form.Item>
         </Form>
       </div>
-      <div className="statistics-chart" ref={containerRef}></div>
-      <div className="statistics-chart" ref={containerRef2}></div>
+
+      <div className="w-800 h-600" ref={containerRef}></div>
+      <div className="w-800 h-600" ref={containerRef2}></div>
     </div>
   );
 };

@@ -462,6 +462,31 @@ export interface MeetingRoomUsedCountVo {
 /**
  *
  * @export
+ * @interface MeetingRoomUsedCountVoUnifiedRes
+ */
+export interface MeetingRoomUsedCountVoUnifiedRes {
+  /**
+   *
+   * @type {Array<MeetingRoomUsedCountVo>}
+   * @memberof MeetingRoomUsedCountVoUnifiedRes
+   */
+  data?: Array<MeetingRoomUsedCountVo>;
+  /**
+   *
+   * @type {number}
+   * @memberof MeetingRoomUsedCountVoUnifiedRes
+   */
+  error?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoomUsedCountVoUnifiedRes
+   */
+  error_msg?: string;
+}
+/**
+ *
+ * @export
  * @interface NullUnifiedRes
  */
 export interface NullUnifiedRes {
@@ -938,6 +963,31 @@ export interface UserBookignCountVo {
    * @memberof UserBookignCountVo
    */
   bookingCount: string;
+}
+/**
+ *
+ * @export
+ * @interface UserBookignCountVoUnifiedRes
+ */
+export interface UserBookignCountVoUnifiedRes {
+  /**
+   *
+   * @type {Array<UserBookignCountVo>}
+   * @memberof UserBookignCountVoUnifiedRes
+   */
+  data?: Array<UserBookignCountVo>;
+  /**
+   *
+   * @type {number}
+   * @memberof UserBookignCountVoUnifiedRes
+   */
+  error?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof UserBookignCountVoUnifiedRes
+   */
+  error_msg?: string;
 }
 /**
  *
@@ -2586,7 +2636,7 @@ export const StatisticApiFp = function (configuration?: Configuration) {
       startTime: string,
       endTime: string,
       options?: any
-    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MeetingRoomUsedCountVoUnifiedRes>> {
       const localVarAxiosArgs = await localVarAxiosParamCreator.statisticControllerMeetingRoomUsedCount(
         startTime,
         endTime,
@@ -2605,7 +2655,7 @@ export const StatisticApiFp = function (configuration?: Configuration) {
       startTime: string,
       endTime: string,
       options?: any
-    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserBookignCountVoUnifiedRes>> {
       const localVarAxiosArgs = await localVarAxiosParamCreator.statisticControllerUserBookignCount(
         startTime,
         endTime,
@@ -2630,7 +2680,11 @@ export const StatisticApiFactory = function (configuration?: Configuration, base
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    statisticControllerMeetingRoomUsedCount(startTime: string, endTime: string, options?: any): AxiosPromise<object> {
+    statisticControllerMeetingRoomUsedCount(
+      startTime: string,
+      endTime: string,
+      options?: any
+    ): AxiosPromise<MeetingRoomUsedCountVoUnifiedRes> {
       return localVarFp
         .statisticControllerMeetingRoomUsedCount(startTime, endTime, options)
         .then(request => request(axios, basePath));
@@ -2642,7 +2696,11 @@ export const StatisticApiFactory = function (configuration?: Configuration, base
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    statisticControllerUserBookignCount(startTime: string, endTime: string, options?: any): AxiosPromise<object> {
+    statisticControllerUserBookignCount(
+      startTime: string,
+      endTime: string,
+      options?: any
+    ): AxiosPromise<UserBookignCountVoUnifiedRes> {
       return localVarFp
         .statisticControllerUserBookignCount(startTime, endTime, options)
         .then(request => request(axios, basePath));

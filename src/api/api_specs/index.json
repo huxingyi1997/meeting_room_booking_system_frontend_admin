@@ -1406,7 +1406,7 @@
                       "type": "string"
                     }
                   },
-                  "$$ref": "#/components/schemas/UserBookignCountVoUnifiedRes"
+                  "$unifiedResRef": "#/components/schemas/UserBookignCountVoUnifiedRes"
                 }
               }
             }
@@ -1462,7 +1462,7 @@
                       "type": "string"
                     }
                   },
-                  "$$ref": "#/components/schemas/MeetingRoomUsedCountVoUnifiedRes"
+                  "$unifiedResRef": "#/components/schemas/MeetingRoomUsedCountVoUnifiedRes"
                 }
               }
             }
