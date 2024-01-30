@@ -7,6 +7,9 @@ const ErrorPage = React.lazy(() => import('./pages/ErrorPage'));
 
 const Menu = React.lazy(() => import('./pages/Menu'));
 const UserManage = React.lazy(() => import('./pages/UserManage'));
+const MeetingRoomManage = React.lazy(() => import('./pages/MeetingRoomManage'));
+const BookingManage = React.lazy(() => import('./pages/BookingManage'));
+const Statistics = React.lazy(() => import('./pages/Statistics'));
 
 const ModifyMenu = React.lazy(() => import('./pages/ModifyMenu'));
 const InfoModify = React.lazy(() => import('./pages/InfoModify'));
@@ -25,8 +28,24 @@ const routes = [
         element: <Menu></Menu>,
         children: [
           {
+            path: '/',
+            element: <MeetingRoomManage />,
+          },
+          {
             path: 'user_manage',
             element: <UserManage />,
+          },
+          {
+            path: 'meeting_room_manage',
+            element: <MeetingRoomManage />,
+          },
+          {
+            path: 'booking_manage',
+            element: <BookingManage />,
+          },
+          {
+            path: 'statistics',
+            element: <Statistics />,
           },
         ],
       },

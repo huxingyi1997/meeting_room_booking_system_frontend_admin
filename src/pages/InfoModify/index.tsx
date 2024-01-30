@@ -47,7 +47,7 @@ const InfoModify = () => {
   }, []);
 
   return (
-    <div id="updateInfo-container" className="w-400 mx-auto mt-50 text-center">
+    <div id="updateInfo-container" className="w-400 mx-auto mt-12 text-center">
       <Form form={form} {...layout1} onFinish={onFinish} colon={false} autoComplete="off">
         <Form.Item label="头像" name="headPic" rules={[{ required: true, message: '请输入头像!' }]} shouldUpdate>
           <HeadPicUpload></HeadPicUpload>

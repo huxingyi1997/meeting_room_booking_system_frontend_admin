@@ -5,7 +5,7 @@
 import axios, { AxiosRequestConfig, HttpStatusCode } from 'axios';
 import { message } from 'antd';
 
-import { Configuration, FeReportApi, UserApi } from './autogen';
+import { Configuration, BookingApi, FEReportApi, MeetingRoomApi, StatisticApi, UserApi } from './autogen';
 
 const baseApiUrl = `${window.location.protocol}//${window.location.host}`;
 
@@ -126,6 +126,12 @@ async function refreshToken() {
 /**
  * import these API instances in your components to use the API methods
  */
-export const feReportApiInterface = new FeReportApi(appConfig, undefined, axiosInstance);
+export const bookingApiInterface = new BookingApi(appConfig, undefined, axiosInstance);
+
+export const feReportApiInterface = new FEReportApi(appConfig, undefined, axiosInstance);
+
+export const meetingRoomApiInterface = new MeetingRoomApi(appConfig, undefined, axiosInstance);
+
+export const statisticApiInterface = new StatisticApi(appConfig, undefined, axiosInstance);
 
 export const userApiInterface = new UserApi(appConfig, undefined, axiosInstance);

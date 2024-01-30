@@ -34,6 +34,191 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  *
  * @export
+ * @interface Booking
+ */
+export interface Booking {
+  /**
+   *
+   * @type {number}
+   * @memberof Booking
+   */
+  startTime: number;
+  /**
+   *
+   * @type {number}
+   * @memberof Booking
+   */
+  endTime: number;
+  /**
+   *
+   * @type {number}
+   * @memberof Booking
+   */
+  id: number;
+  /**
+   *
+   * @type {string}
+   * @memberof Booking
+   */
+  status: BookingStatusEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof Booking
+   */
+  note?: string;
+  /**
+   *
+   * @type {User}
+   * @memberof Booking
+   */
+  user: User;
+  /**
+   *
+   * @type {MeetingRoom}
+   * @memberof Booking
+   */
+  room: MeetingRoom;
+  /**
+   *
+   * @type {string}
+   * @memberof Booking
+   */
+  createTime: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Booking
+   */
+  updateTime: string;
+}
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum BookingStatusEnum {
+  Progressing = 'progressing',
+  Approved = 'approved',
+  Rejected = 'rejected',
+  Released = 'released',
+}
+
+/**
+ *
+ * @export
+ * @interface BookingListVo
+ */
+export interface BookingListVo {
+  /**
+   *
+   * @type {Array<Booking>}
+   * @memberof BookingListVo
+   */
+  bookings: Array<Booking>;
+  /**
+   *
+   * @type {number}
+   * @memberof BookingListVo
+   */
+  totalCount: number;
+}
+/**
+ *
+ * @export
+ * @interface BookingListVoUnifiedRes
+ */
+export interface BookingListVoUnifiedRes {
+  /**
+   *
+   * @type {BookingListVo}
+   * @memberof BookingListVoUnifiedRes
+   */
+  data?: BookingListVo;
+  /**
+   *
+   * @type {number}
+   * @memberof BookingListVoUnifiedRes
+   */
+  code?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof BookingListVoUnifiedRes
+   */
+  message?: string;
+}
+/**
+ *
+ * @export
+ * @interface CreateBookingDto
+ */
+export interface CreateBookingDto {
+  /**
+   *
+   * @type {number}
+   * @memberof CreateBookingDto
+   */
+  startTime: number;
+  /**
+   *
+   * @type {number}
+   * @memberof CreateBookingDto
+   */
+  endTime: number;
+  /**
+   *
+   * @type {number}
+   * @memberof CreateBookingDto
+   */
+  meetingRoomId: number;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateBookingDto
+   */
+  note?: string;
+}
+/**
+ *
+ * @export
+ * @interface CreateMeetingRoomDto
+ */
+export interface CreateMeetingRoomDto {
+  /**
+   *
+   * @type {string}
+   * @memberof CreateMeetingRoomDto
+   */
+  name: string;
+  /**
+   *
+   * @type {number}
+   * @memberof CreateMeetingRoomDto
+   */
+  capacity: number;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateMeetingRoomDto
+   */
+  location: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateMeetingRoomDto
+   */
+  equipment: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateMeetingRoomDto
+   */
+  description: string;
+}
+/**
+ *
+ * @export
  * @interface ErrorReportDto
  */
 export interface ErrorReportDto {
@@ -118,6 +303,186 @@ export interface LoginUserVoUnifiedRes {
    * @memberof LoginUserVoUnifiedRes
    */
   message?: string;
+}
+/**
+ *
+ * @export
+ * @interface MeetingRoom
+ */
+export interface MeetingRoom {
+  /**
+   *
+   * @type {number}
+   * @memberof MeetingRoom
+   */
+  id: number;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoom
+   */
+  name: string;
+  /**
+   *
+   * @type {number}
+   * @memberof MeetingRoom
+   */
+  capacity: number;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoom
+   */
+  location: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoom
+   */
+  equipment: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoom
+   */
+  description: string;
+  /**
+   *
+   * @type {boolean}
+   * @memberof MeetingRoom
+   */
+  isBooked: boolean;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoom
+   */
+  createTime: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoom
+   */
+  updateTime: string;
+}
+/**
+ *
+ * @export
+ * @interface MeetingRoomListVo
+ */
+export interface MeetingRoomListVo {
+  /**
+   *
+   * @type {Array<MeetingRoom>}
+   * @memberof MeetingRoomListVo
+   */
+  meetingRooms: Array<MeetingRoom>;
+  /**
+   *
+   * @type {number}
+   * @memberof MeetingRoomListVo
+   */
+  totalCount: number;
+}
+/**
+ *
+ * @export
+ * @interface MeetingRoomListVoUnifiedRes
+ */
+export interface MeetingRoomListVoUnifiedRes {
+  /**
+   *
+   * @type {MeetingRoomListVo}
+   * @memberof MeetingRoomListVoUnifiedRes
+   */
+  data?: MeetingRoomListVo;
+  /**
+   *
+   * @type {number}
+   * @memberof MeetingRoomListVoUnifiedRes
+   */
+  code?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoomListVoUnifiedRes
+   */
+  message?: string;
+}
+/**
+ *
+ * @export
+ * @interface MeetingRoomUnifiedRes
+ */
+export interface MeetingRoomUnifiedRes {
+  /**
+   *
+   * @type {MeetingRoom}
+   * @memberof MeetingRoomUnifiedRes
+   */
+  data?: MeetingRoom;
+  /**
+   *
+   * @type {number}
+   * @memberof MeetingRoomUnifiedRes
+   */
+  code?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoomUnifiedRes
+   */
+  message?: string;
+}
+/**
+ *
+ * @export
+ * @interface MeetingRoomUsedCountVo
+ */
+export interface MeetingRoomUsedCountVo {
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoomUsedCountVo
+   */
+  meetingRoomId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoomUsedCountVo
+   */
+  meetingRoomName: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoomUsedCountVo
+   */
+  usedCount: string;
+}
+/**
+ *
+ * @export
+ * @interface MeetingRoomUsedCountVoUnifiedRes
+ */
+export interface MeetingRoomUsedCountVoUnifiedRes {
+  /**
+   *
+   * @type {Array<MeetingRoomUsedCountVo>}
+   * @memberof MeetingRoomUsedCountVoUnifiedRes
+   */
+  data?: Array<MeetingRoomUsedCountVo>;
+  /**
+   *
+   * @type {number}
+   * @memberof MeetingRoomUsedCountVoUnifiedRes
+   */
+  error?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof MeetingRoomUsedCountVoUnifiedRes
+   */
+  error_msg?: string;
 }
 /**
  *
@@ -262,6 +627,31 @@ export interface PerformanceEntry {
 /**
  *
  * @export
+ * @interface Permission
+ */
+export interface Permission {
+  /**
+   *
+   * @type {number}
+   * @memberof Permission
+   */
+  id: number;
+  /**
+   *
+   * @type {string}
+   * @memberof Permission
+   */
+  code: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Permission
+   */
+  description: string;
+}
+/**
+ *
+ * @export
  * @interface RefreshTokenVo
  */
 export interface RefreshTokenVo {
@@ -343,6 +733,74 @@ export interface RegisterUserDto {
 /**
  *
  * @export
+ * @interface Role
+ */
+export interface Role {
+  /**
+   *
+   * @type {number}
+   * @memberof Role
+   */
+  id: number;
+  /**
+   *
+   * @type {string}
+   * @memberof Role
+   */
+  name: string;
+  /**
+   *
+   * @type {Array<Permission>}
+   * @memberof Role
+   */
+  permissions: Array<Permission>;
+}
+/**
+ *
+ * @export
+ * @interface UpdateMeetingRoomDto
+ */
+export interface UpdateMeetingRoomDto {
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateMeetingRoomDto
+   */
+  name?: string;
+  /**
+   *
+   * @type {number}
+   * @memberof UpdateMeetingRoomDto
+   */
+  capacity?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateMeetingRoomDto
+   */
+  location?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateMeetingRoomDto
+   */
+  equipment?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateMeetingRoomDto
+   */
+  description?: string;
+  /**
+   *
+   * @type {number}
+   * @memberof UpdateMeetingRoomDto
+   */
+  id: number;
+}
+/**
+ *
+ * @export
  * @interface UpdateUserDto
  */
 export interface UpdateUserDto {
@@ -369,7 +827,7 @@ export interface UpdateUserDto {
    * @type {string}
    * @memberof UpdateUserDto
    */
-  headPic: string;
+  headPic?: string;
 }
 /**
  *
@@ -401,6 +859,135 @@ export interface UpdateUserPasswordDto {
    * @memberof UpdateUserPasswordDto
    */
   captcha: string;
+}
+/**
+ *
+ * @export
+ * @interface User
+ */
+export interface User {
+  /**
+   *
+   * @type {number}
+   * @memberof User
+   */
+  id: number;
+  /**
+   *
+   * @type {string}
+   * @memberof User
+   */
+  username: string;
+  /**
+   *
+   * @type {string}
+   * @memberof User
+   */
+  password: string;
+  /**
+   *
+   * @type {string}
+   * @memberof User
+   */
+  nickName: string;
+  /**
+   *
+   * @type {string}
+   * @memberof User
+   */
+  email: string;
+  /**
+   *
+   * @type {string}
+   * @memberof User
+   */
+  headPic?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof User
+   */
+  phoneNumber?: string;
+  /**
+   *
+   * @type {boolean}
+   * @memberof User
+   */
+  isFrozen: boolean;
+  /**
+   *
+   * @type {boolean}
+   * @memberof User
+   */
+  isAdmin: boolean;
+  /**
+   *
+   * @type {string}
+   * @memberof User
+   */
+  createTime: string;
+  /**
+   *
+   * @type {string}
+   * @memberof User
+   */
+  updateTime: string;
+  /**
+   *
+   * @type {Array<Role>}
+   * @memberof User
+   */
+  roles: Array<Role>;
+}
+/**
+ *
+ * @export
+ * @interface UserBookignCountVo
+ */
+export interface UserBookignCountVo {
+  /**
+   *
+   * @type {string}
+   * @memberof UserBookignCountVo
+   */
+  userId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof UserBookignCountVo
+   */
+  username: string;
+  /**
+   *
+   * @type {string}
+   * @memberof UserBookignCountVo
+   */
+  bookingCount: string;
+}
+/**
+ *
+ * @export
+ * @interface UserBookignCountVoUnifiedRes
+ */
+export interface UserBookignCountVoUnifiedRes {
+  /**
+   *
+   * @type {Array<UserBookignCountVo>}
+   * @memberof UserBookignCountVoUnifiedRes
+   */
+  data?: Array<UserBookignCountVo>;
+  /**
+   *
+   * @type {number}
+   * @memberof UserBookignCountVoUnifiedRes
+   */
+  error?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof UserBookignCountVoUnifiedRes
+   */
+  error_msg?: string;
 }
 /**
  *
@@ -437,13 +1024,13 @@ export interface UserDetailVo {
    * @type {string}
    * @memberof UserDetailVo
    */
-  headPic: string;
+  headPic?: string;
   /**
    *
    * @type {string}
    * @memberof UserDetailVo
    */
-  phoneNumber: string;
+  phoneNumber?: string;
   /**
    *
    * @type {boolean}
@@ -541,13 +1128,13 @@ export interface UserInfo {
    * @type {string}
    * @memberof UserInfo
    */
-  headPic: string;
+  headPic?: string;
   /**
    *
    * @type {string}
    * @memberof UserInfo
    */
-  phoneNumber: string;
+  phoneNumber?: string;
   /**
    *
    * @type {boolean}
@@ -607,10 +1194,576 @@ export interface UserListVoUnifiedRes {
 }
 
 /**
- * FeReportApi - axios parameter creator
+ * BookingApi - axios parameter creator
  * @export
  */
-export const FeReportApiAxiosParamCreator = function (configuration?: Configuration) {
+export const BookingApiAxiosParamCreator = function (configuration?: Configuration) {
+  return {
+    /**
+     *
+     * @param {CreateBookingDto} createBookingDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bookingControllerAdd: async (createBookingDto: CreateBookingDto, options: any = {}): Promise<RequestArgs> => {
+      // verify required parameter 'createBookingDto' is not null or undefined
+      assertParamExists('bookingControllerAdd', 'createBookingDto', createBookingDto);
+      const localVarPath = `/api/v1/booking/add`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(createBookingDto, localVarRequestOptions, configuration);
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bookingControllerApply: async (id: number, options: any = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('bookingControllerApply', 'id', id);
+      const localVarPath = `/api/v1/booking/apply/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {number} [pageNo]
+     * @param {number} [pageSize]
+     * @param {string} [username]
+     * @param {string} [meetingRoomName]
+     * @param {string} [meetingRoomPosition]
+     * @param {number} [bookingTimeRangeStart]
+     * @param {number} [bookingTimeRangeEnd]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bookingControllerList: async (
+      pageNo?: number,
+      pageSize?: number,
+      username?: string,
+      meetingRoomName?: string,
+      meetingRoomPosition?: string,
+      bookingTimeRangeStart?: number,
+      bookingTimeRangeEnd?: number,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/api/v1/booking/list`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (pageNo !== undefined) {
+        localVarQueryParameter['pageNo'] = pageNo;
+      }
+
+      if (pageSize !== undefined) {
+        localVarQueryParameter['pageSize'] = pageSize;
+      }
+
+      if (username !== undefined) {
+        localVarQueryParameter['username'] = username;
+      }
+
+      if (meetingRoomName !== undefined) {
+        localVarQueryParameter['meetingRoomName'] = meetingRoomName;
+      }
+
+      if (meetingRoomPosition !== undefined) {
+        localVarQueryParameter['meetingRoomPosition'] = meetingRoomPosition;
+      }
+
+      if (bookingTimeRangeStart !== undefined) {
+        localVarQueryParameter['bookingTimeRangeStart'] = bookingTimeRangeStart;
+      }
+
+      if (bookingTimeRangeEnd !== undefined) {
+        localVarQueryParameter['bookingTimeRangeEnd'] = bookingTimeRangeEnd;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bookingControllerReject: async (id: number, options: any = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('bookingControllerReject', 'id', id);
+      const localVarPath = `/api/v1/booking/reject/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bookingControllerUnbind: async (id: number, options: any = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('bookingControllerUnbind', 'id', id);
+      const localVarPath = `/api/v1/booking/unbind/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bookingControllerUrge: async (id: number, options: any = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('bookingControllerUrge', 'id', id);
+      const localVarPath = `/api/v1/booking/urge/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * BookingApi - functional programming interface
+ * @export
+ */
+export const BookingApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = BookingApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @param {CreateBookingDto} createBookingDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async bookingControllerAdd(
+      createBookingDto: CreateBookingDto,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NullUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.bookingControllerAdd(createBookingDto, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async bookingControllerApply(
+      id: number,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NullUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.bookingControllerApply(id, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+    /**
+     *
+     * @param {number} [pageNo]
+     * @param {number} [pageSize]
+     * @param {string} [username]
+     * @param {string} [meetingRoomName]
+     * @param {string} [meetingRoomPosition]
+     * @param {number} [bookingTimeRangeStart]
+     * @param {number} [bookingTimeRangeEnd]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async bookingControllerList(
+      pageNo?: number,
+      pageSize?: number,
+      username?: string,
+      meetingRoomName?: string,
+      meetingRoomPosition?: string,
+      bookingTimeRangeStart?: number,
+      bookingTimeRangeEnd?: number,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BookingListVoUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.bookingControllerList(
+        pageNo,
+        pageSize,
+        username,
+        meetingRoomName,
+        meetingRoomPosition,
+        bookingTimeRangeStart,
+        bookingTimeRangeEnd,
+        options
+      );
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async bookingControllerReject(
+      id: number,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NullUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.bookingControllerReject(id, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async bookingControllerUnbind(
+      id: number,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NullUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.bookingControllerUnbind(id, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async bookingControllerUrge(
+      id: number,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NullUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.bookingControllerUrge(id, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+  };
+};
+
+/**
+ * BookingApi - factory interface
+ * @export
+ */
+export const BookingApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+  const localVarFp = BookingApiFp(configuration);
+  return {
+    /**
+     *
+     * @param {CreateBookingDto} createBookingDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bookingControllerAdd(createBookingDto: CreateBookingDto, options?: any): AxiosPromise<NullUnifiedRes> {
+      return localVarFp.bookingControllerAdd(createBookingDto, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bookingControllerApply(id: number, options?: any): AxiosPromise<NullUnifiedRes> {
+      return localVarFp.bookingControllerApply(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {number} [pageNo]
+     * @param {number} [pageSize]
+     * @param {string} [username]
+     * @param {string} [meetingRoomName]
+     * @param {string} [meetingRoomPosition]
+     * @param {number} [bookingTimeRangeStart]
+     * @param {number} [bookingTimeRangeEnd]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bookingControllerList(
+      pageNo?: number,
+      pageSize?: number,
+      username?: string,
+      meetingRoomName?: string,
+      meetingRoomPosition?: string,
+      bookingTimeRangeStart?: number,
+      bookingTimeRangeEnd?: number,
+      options?: any
+    ): AxiosPromise<BookingListVoUnifiedRes> {
+      return localVarFp
+        .bookingControllerList(
+          pageNo,
+          pageSize,
+          username,
+          meetingRoomName,
+          meetingRoomPosition,
+          bookingTimeRangeStart,
+          bookingTimeRangeEnd,
+          options
+        )
+        .then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bookingControllerReject(id: number, options?: any): AxiosPromise<NullUnifiedRes> {
+      return localVarFp.bookingControllerReject(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bookingControllerUnbind(id: number, options?: any): AxiosPromise<NullUnifiedRes> {
+      return localVarFp.bookingControllerUnbind(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bookingControllerUrge(id: number, options?: any): AxiosPromise<NullUnifiedRes> {
+      return localVarFp.bookingControllerUrge(id, options).then(request => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * BookingApi - object-oriented interface
+ * @export
+ * @class BookingApi
+ * @extends {BaseAPI}
+ */
+export class BookingApi extends BaseAPI {
+  /**
+   *
+   * @param {CreateBookingDto} createBookingDto
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof BookingApi
+   */
+  public bookingControllerAdd(createBookingDto: CreateBookingDto, options?: any) {
+    return BookingApiFp(this.configuration)
+      .bookingControllerAdd(createBookingDto, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof BookingApi
+   */
+  public bookingControllerApply(id: number, options?: any) {
+    return BookingApiFp(this.configuration)
+      .bookingControllerApply(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {number} [pageNo]
+   * @param {number} [pageSize]
+   * @param {string} [username]
+   * @param {string} [meetingRoomName]
+   * @param {string} [meetingRoomPosition]
+   * @param {number} [bookingTimeRangeStart]
+   * @param {number} [bookingTimeRangeEnd]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof BookingApi
+   */
+  public bookingControllerList(
+    pageNo?: number,
+    pageSize?: number,
+    username?: string,
+    meetingRoomName?: string,
+    meetingRoomPosition?: string,
+    bookingTimeRangeStart?: number,
+    bookingTimeRangeEnd?: number,
+    options?: any
+  ) {
+    return BookingApiFp(this.configuration)
+      .bookingControllerList(
+        pageNo,
+        pageSize,
+        username,
+        meetingRoomName,
+        meetingRoomPosition,
+        bookingTimeRangeStart,
+        bookingTimeRangeEnd,
+        options
+      )
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof BookingApi
+   */
+  public bookingControllerReject(id: number, options?: any) {
+    return BookingApiFp(this.configuration)
+      .bookingControllerReject(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof BookingApi
+   */
+  public bookingControllerUnbind(id: number, options?: any) {
+    return BookingApiFp(this.configuration)
+      .bookingControllerUnbind(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof BookingApi
+   */
+  public bookingControllerUrge(id: number, options?: any) {
+    return BookingApiFp(this.configuration)
+      .bookingControllerUrge(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+}
+
+/**
+ * FEReportApi - axios parameter creator
+ * @export
+ */
+export const FEReportApiAxiosParamCreator = function (configuration?: Configuration) {
   return {
     /**
      *
@@ -682,11 +1835,11 @@ export const FeReportApiAxiosParamCreator = function (configuration?: Configurat
 };
 
 /**
- * FeReportApi - functional programming interface
+ * FEReportApi - functional programming interface
  * @export
  */
-export const FeReportApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = FeReportApiAxiosParamCreator(configuration);
+export const FEReportApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = FEReportApiAxiosParamCreator(configuration);
   return {
     /**
      *
@@ -718,11 +1871,11 @@ export const FeReportApiFp = function (configuration?: Configuration) {
 };
 
 /**
- * FeReportApi - factory interface
+ * FEReportApi - factory interface
  * @export
  */
-export const FeReportApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-  const localVarFp = FeReportApiFp(configuration);
+export const FEReportApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+  const localVarFp = FEReportApiFp(configuration);
   return {
     /**
      *
@@ -748,21 +1901,21 @@ export const FeReportApiFactory = function (configuration?: Configuration, baseP
 };
 
 /**
- * FeReportApi - object-oriented interface
+ * FEReportApi - object-oriented interface
  * @export
- * @class FeReportApi
+ * @class FEReportApi
  * @extends {BaseAPI}
  */
-export class FeReportApi extends BaseAPI {
+export class FEReportApi extends BaseAPI {
   /**
    *
    * @param {ErrorReportDto} errorReportDto
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof FeReportApi
+   * @memberof FEReportApi
    */
   public feReportControllerError(errorReportDto: ErrorReportDto, options?: any) {
-    return FeReportApiFp(this.configuration)
+    return FEReportApiFp(this.configuration)
       .feReportControllerError(errorReportDto, options)
       .then(request => request(this.axios, this.basePath));
   }
@@ -772,20 +1925,502 @@ export class FeReportApi extends BaseAPI {
    * @param {PerformanceDto} performanceDto
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof FeReportApi
+   * @memberof FEReportApi
    */
   public feReportControllerPerformance(performanceDto: PerformanceDto, options?: any) {
-    return FeReportApiFp(this.configuration)
+    return FEReportApiFp(this.configuration)
       .feReportControllerPerformance(performanceDto, options)
       .then(request => request(this.axios, this.basePath));
   }
 }
 
 /**
- * SseApi - axios parameter creator
+ * MeetingRoomApi - axios parameter creator
  * @export
  */
-export const SseApiAxiosParamCreator = function (configuration?: Configuration) {
+export const MeetingRoomApiAxiosParamCreator = function (configuration?: Configuration) {
+  return {
+    /**
+     *
+     * @param {CreateMeetingRoomDto} createMeetingRoomDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    meetingRoomControllerCreate: async (
+      createMeetingRoomDto: CreateMeetingRoomDto,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'createMeetingRoomDto' is not null or undefined
+      assertParamExists('meetingRoomControllerCreate', 'createMeetingRoomDto', createMeetingRoomDto);
+      const localVarPath = `/api/v1/meeting-room/create`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(createMeetingRoomDto, localVarRequestOptions, configuration);
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    meetingRoomControllerDelete: async (id: number, options: any = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('meetingRoomControllerDelete', 'id', id);
+      const localVarPath = `/api/v1/meeting-room/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    meetingRoomControllerFind: async (id: number, options: any = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('meetingRoomControllerFind', 'id', id);
+      const localVarPath = `/api/v1/meeting-room/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {number} [pageNo]
+     * @param {number} [pageSize]
+     * @param {string} [name]
+     * @param {number} [capacity]
+     * @param {string} [equipment]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    meetingRoomControllerList: async (
+      pageNo?: number,
+      pageSize?: number,
+      name?: string,
+      capacity?: number,
+      equipment?: string,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/api/v1/meeting-room/list`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (pageNo !== undefined) {
+        localVarQueryParameter['pageNo'] = pageNo;
+      }
+
+      if (pageSize !== undefined) {
+        localVarQueryParameter['pageSize'] = pageSize;
+      }
+
+      if (name !== undefined) {
+        localVarQueryParameter['name'] = name;
+      }
+
+      if (capacity !== undefined) {
+        localVarQueryParameter['capacity'] = capacity;
+      }
+
+      if (equipment !== undefined) {
+        localVarQueryParameter['equipment'] = equipment;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {UpdateMeetingRoomDto} updateMeetingRoomDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    meetingRoomControllerUpdate: async (
+      updateMeetingRoomDto: UpdateMeetingRoomDto,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'updateMeetingRoomDto' is not null or undefined
+      assertParamExists('meetingRoomControllerUpdate', 'updateMeetingRoomDto', updateMeetingRoomDto);
+      const localVarPath = `/api/v1/meeting-room/update`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(updateMeetingRoomDto, localVarRequestOptions, configuration);
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * MeetingRoomApi - functional programming interface
+ * @export
+ */
+export const MeetingRoomApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = MeetingRoomApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @param {CreateMeetingRoomDto} createMeetingRoomDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async meetingRoomControllerCreate(
+      createMeetingRoomDto: CreateMeetingRoomDto,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MeetingRoomUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.meetingRoomControllerCreate(
+        createMeetingRoomDto,
+        options
+      );
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async meetingRoomControllerDelete(
+      id: number,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NullUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.meetingRoomControllerDelete(id, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async meetingRoomControllerFind(
+      id: number,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MeetingRoomUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.meetingRoomControllerFind(id, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+    /**
+     *
+     * @param {number} [pageNo]
+     * @param {number} [pageSize]
+     * @param {string} [name]
+     * @param {number} [capacity]
+     * @param {string} [equipment]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async meetingRoomControllerList(
+      pageNo?: number,
+      pageSize?: number,
+      name?: string,
+      capacity?: number,
+      equipment?: string,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MeetingRoomListVoUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.meetingRoomControllerList(
+        pageNo,
+        pageSize,
+        name,
+        capacity,
+        equipment,
+        options
+      );
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+    /**
+     *
+     * @param {UpdateMeetingRoomDto} updateMeetingRoomDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async meetingRoomControllerUpdate(
+      updateMeetingRoomDto: UpdateMeetingRoomDto,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NullUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.meetingRoomControllerUpdate(
+        updateMeetingRoomDto,
+        options
+      );
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+  };
+};
+
+/**
+ * MeetingRoomApi - factory interface
+ * @export
+ */
+export const MeetingRoomApiFactory = function (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance
+) {
+  const localVarFp = MeetingRoomApiFp(configuration);
+  return {
+    /**
+     *
+     * @param {CreateMeetingRoomDto} createMeetingRoomDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    meetingRoomControllerCreate(
+      createMeetingRoomDto: CreateMeetingRoomDto,
+      options?: any
+    ): AxiosPromise<MeetingRoomUnifiedRes> {
+      return localVarFp
+        .meetingRoomControllerCreate(createMeetingRoomDto, options)
+        .then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    meetingRoomControllerDelete(id: number, options?: any): AxiosPromise<NullUnifiedRes> {
+      return localVarFp.meetingRoomControllerDelete(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    meetingRoomControllerFind(id: number, options?: any): AxiosPromise<MeetingRoomUnifiedRes> {
+      return localVarFp.meetingRoomControllerFind(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {number} [pageNo]
+     * @param {number} [pageSize]
+     * @param {string} [name]
+     * @param {number} [capacity]
+     * @param {string} [equipment]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    meetingRoomControllerList(
+      pageNo?: number,
+      pageSize?: number,
+      name?: string,
+      capacity?: number,
+      equipment?: string,
+      options?: any
+    ): AxiosPromise<MeetingRoomListVoUnifiedRes> {
+      return localVarFp
+        .meetingRoomControllerList(pageNo, pageSize, name, capacity, equipment, options)
+        .then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {UpdateMeetingRoomDto} updateMeetingRoomDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    meetingRoomControllerUpdate(
+      updateMeetingRoomDto: UpdateMeetingRoomDto,
+      options?: any
+    ): AxiosPromise<NullUnifiedRes> {
+      return localVarFp
+        .meetingRoomControllerUpdate(updateMeetingRoomDto, options)
+        .then(request => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * MeetingRoomApi - object-oriented interface
+ * @export
+ * @class MeetingRoomApi
+ * @extends {BaseAPI}
+ */
+export class MeetingRoomApi extends BaseAPI {
+  /**
+   *
+   * @param {CreateMeetingRoomDto} createMeetingRoomDto
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MeetingRoomApi
+   */
+  public meetingRoomControllerCreate(createMeetingRoomDto: CreateMeetingRoomDto, options?: any) {
+    return MeetingRoomApiFp(this.configuration)
+      .meetingRoomControllerCreate(createMeetingRoomDto, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MeetingRoomApi
+   */
+  public meetingRoomControllerDelete(id: number, options?: any) {
+    return MeetingRoomApiFp(this.configuration)
+      .meetingRoomControllerDelete(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MeetingRoomApi
+   */
+  public meetingRoomControllerFind(id: number, options?: any) {
+    return MeetingRoomApiFp(this.configuration)
+      .meetingRoomControllerFind(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {number} [pageNo]
+   * @param {number} [pageSize]
+   * @param {string} [name]
+   * @param {number} [capacity]
+   * @param {string} [equipment]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MeetingRoomApi
+   */
+  public meetingRoomControllerList(
+    pageNo?: number,
+    pageSize?: number,
+    name?: string,
+    capacity?: number,
+    equipment?: string,
+    options?: any
+  ) {
+    return MeetingRoomApiFp(this.configuration)
+      .meetingRoomControllerList(pageNo, pageSize, name, capacity, equipment, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {UpdateMeetingRoomDto} updateMeetingRoomDto
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MeetingRoomApi
+   */
+  public meetingRoomControllerUpdate(updateMeetingRoomDto: UpdateMeetingRoomDto, options?: any) {
+    return MeetingRoomApiFp(this.configuration)
+      .meetingRoomControllerUpdate(updateMeetingRoomDto, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+}
+
+/**
+ * SSEApi - axios parameter creator
+ * @export
+ */
+export const SSEApiAxiosParamCreator = function (configuration?: Configuration) {
   return {
     /**
      *
@@ -818,11 +2453,11 @@ export const SseApiAxiosParamCreator = function (configuration?: Configuration) 
 };
 
 /**
- * SseApi - functional programming interface
+ * SSEApi - functional programming interface
  * @export
  */
-export const SseApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = SseApiAxiosParamCreator(configuration);
+export const SSEApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = SSEApiAxiosParamCreator(configuration);
   return {
     /**
      *
@@ -839,11 +2474,11 @@ export const SseApiFp = function (configuration?: Configuration) {
 };
 
 /**
- * SseApi - factory interface
+ * SSEApi - factory interface
  * @export
  */
-export const SseApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-  const localVarFp = SseApiFp(configuration);
+export const SSEApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+  const localVarFp = SSEApiFp(configuration);
   return {
     /**
      *
@@ -857,21 +2492,254 @@ export const SseApiFactory = function (configuration?: Configuration, basePath?:
 };
 
 /**
- * SseApi - object-oriented interface
+ * SSEApi - object-oriented interface
  * @export
- * @class SseApi
+ * @class SSEApi
  * @extends {BaseAPI}
  */
-export class SseApi extends BaseAPI {
+export class SSEApi extends BaseAPI {
   /**
    *
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof SseApi
+   * @memberof SSEApi
    */
   public sseControllerUpdateRecord(options?: any) {
-    return SseApiFp(this.configuration)
+    return SSEApiFp(this.configuration)
       .sseControllerUpdateRecord(options)
+      .then(request => request(this.axios, this.basePath));
+  }
+}
+
+/**
+ * StatisticApi - axios parameter creator
+ * @export
+ */
+export const StatisticApiAxiosParamCreator = function (configuration?: Configuration) {
+  return {
+    /**
+     *
+     * @param {string} startTime
+     * @param {string} endTime
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    statisticControllerMeetingRoomUsedCount: async (
+      startTime: string,
+      endTime: string,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'startTime' is not null or undefined
+      assertParamExists('statisticControllerMeetingRoomUsedCount', 'startTime', startTime);
+      // verify required parameter 'endTime' is not null or undefined
+      assertParamExists('statisticControllerMeetingRoomUsedCount', 'endTime', endTime);
+      const localVarPath = `/api/v1/statistic/meetingRoomUsedCount`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (startTime !== undefined) {
+        localVarQueryParameter['startTime'] = startTime;
+      }
+
+      if (endTime !== undefined) {
+        localVarQueryParameter['endTime'] = endTime;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {string} startTime
+     * @param {string} endTime
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    statisticControllerUserBookignCount: async (
+      startTime: string,
+      endTime: string,
+      options: any = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'startTime' is not null or undefined
+      assertParamExists('statisticControllerUserBookignCount', 'startTime', startTime);
+      // verify required parameter 'endTime' is not null or undefined
+      assertParamExists('statisticControllerUserBookignCount', 'endTime', endTime);
+      const localVarPath = `/api/v1/statistic/userBookingCount`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (startTime !== undefined) {
+        localVarQueryParameter['startTime'] = startTime;
+      }
+
+      if (endTime !== undefined) {
+        localVarQueryParameter['endTime'] = endTime;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * StatisticApi - functional programming interface
+ * @export
+ */
+export const StatisticApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = StatisticApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @param {string} startTime
+     * @param {string} endTime
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async statisticControllerMeetingRoomUsedCount(
+      startTime: string,
+      endTime: string,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MeetingRoomUsedCountVoUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.statisticControllerMeetingRoomUsedCount(
+        startTime,
+        endTime,
+        options
+      );
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+    /**
+     *
+     * @param {string} startTime
+     * @param {string} endTime
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async statisticControllerUserBookignCount(
+      startTime: string,
+      endTime: string,
+      options?: any
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserBookignCountVoUnifiedRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.statisticControllerUserBookignCount(
+        startTime,
+        endTime,
+        options
+      );
+      return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+    },
+  };
+};
+
+/**
+ * StatisticApi - factory interface
+ * @export
+ */
+export const StatisticApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+  const localVarFp = StatisticApiFp(configuration);
+  return {
+    /**
+     *
+     * @param {string} startTime
+     * @param {string} endTime
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    statisticControllerMeetingRoomUsedCount(
+      startTime: string,
+      endTime: string,
+      options?: any
+    ): AxiosPromise<MeetingRoomUsedCountVoUnifiedRes> {
+      return localVarFp
+        .statisticControllerMeetingRoomUsedCount(startTime, endTime, options)
+        .then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {string} startTime
+     * @param {string} endTime
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    statisticControllerUserBookignCount(
+      startTime: string,
+      endTime: string,
+      options?: any
+    ): AxiosPromise<UserBookignCountVoUnifiedRes> {
+      return localVarFp
+        .statisticControllerUserBookignCount(startTime, endTime, options)
+        .then(request => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * StatisticApi - object-oriented interface
+ * @export
+ * @class StatisticApi
+ * @extends {BaseAPI}
+ */
+export class StatisticApi extends BaseAPI {
+  /**
+   *
+   * @param {string} startTime
+   * @param {string} endTime
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof StatisticApi
+   */
+  public statisticControllerMeetingRoomUsedCount(startTime: string, endTime: string, options?: any) {
+    return StatisticApiFp(this.configuration)
+      .statisticControllerMeetingRoomUsedCount(startTime, endTime, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {string} startTime
+   * @param {string} endTime
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof StatisticApi
+   */
+  public statisticControllerUserBookignCount(startTime: string, endTime: string, options?: any) {
+    return StatisticApiFp(this.configuration)
+      .statisticControllerUserBookignCount(startTime, endTime, options)
       .then(request => request(this.axios, this.basePath));
   }
 }
